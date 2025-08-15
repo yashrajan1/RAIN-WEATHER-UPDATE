@@ -1,14 +1,14 @@
 from email.mime.text import MIMEText
-
+import os
 import requests
 import smtplib
 
 MY_EMAIL = "yraj42912@gmail.com"
-PASSWORD = "lparcrmbjrdxfklw"
+PASSWORD = os.environ.get("PASSWORD")
 msg_content = "Subject:Warning! Today there will be rain a lot!\n\nRemember to bring umbrella ☔!"
 
 
-api_key = "41f4ff6c993263112c851d812746d166"
+api_key = os.environ.get("API_KEY")
 endpoint_hourly = "https://pro.openweathermap.org/data/2.5/forecast"
 weather_params = {
     "lat":21.145800,
@@ -32,6 +32,7 @@ if will_rain:
         connection.sendmail(from_addr=MY_EMAIL,
                             to_addrs=MY_EMAIL,
                             msg=msg.as_string())
+
 
 
 
