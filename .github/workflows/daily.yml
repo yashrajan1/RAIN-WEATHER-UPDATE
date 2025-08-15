@@ -1,0 +1,25 @@
+name: Run Python Script Daily
+
+on:
+  schedule:
+    - cron: "0 1 * * *"  # Runs every day at 01:00 UTC
+  workflow_dispatch:      # Lets you run manually
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt || true
+
+      - name: Run main
+        run: python main.py
